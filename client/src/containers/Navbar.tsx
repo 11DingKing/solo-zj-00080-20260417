@@ -2,8 +2,10 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Button, makeStyles, Grid } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 import AuthLinks from '../components/auth-links/AuthLinks';
+import { IStore } from '../types';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
@@ -30,11 +32,17 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
       color: 'black'
     }
+  },
+  navButton: {
+    height: '48px',
+    minWidth: '80px',
+    textDecoration: 'none'
   }
 }));
 
 const Navbar = () => {
   const classes = useStyles();
+  const { currentUser } = useSelector((state: IStore) => state.auth);
 
   return (
     <Grid
@@ -44,36 +52,49 @@ const Navbar = () => {
       className={classes.navbar}
     >
       <Grid item className={classes.navLinks}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>
             <Link to="/">
               <Button
+                className={classes.navButton}
                 style={{
-                  textDecoration: 'none',
-                  border: '2px black solid',
-                  height: '48px',
-                  width: '80px'
+                  border: '2px black solid'
                 }}
               >
                 Home
               </Button>
             </Link>
           </Grid>
-          <Grid item xs={6}>
-            <Link to="/demo">
-              <Button
-                style={{
-                  background: 'black',
-                  color: 'white',
-                  textDecoration: 'none',
-                  height: '48px',
-                  width: '80px'
-                }}
-              >
-                Demo
-              </Button>
-            </Link>
-          </Grid>
+          {currentUser && (
+            <>
+              <Grid item>
+                <Link to="/demo">
+                  <Button
+                    className={classes.navButton}
+                    style={{
+                      background: 'black',
+                      color: 'white'
+                    }}
+                  >
+                    Demo
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to="/users">
+                  <Button
+                    className={classes.navButton}
+                    style={{
+                      background: '#FF0083',
+                      color: 'white'
+                    }}
+                  >
+                    Users
+                  </Button>
+                </Link>
+              </Grid>
+            </>
+          )}
         </Grid>
       </Grid>
       <Grid item className={classes.authLinks}>

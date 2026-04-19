@@ -25,6 +25,26 @@ export type CurrentUser = {
   token?: string;
 };
 
+export type User = {
+  id: string;
+  createdOn: Date;
+  email: string;
+};
+
+export type UsersList = {
+  users: User[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};
+
+export type GetUsersQuery = {
+  page?: number;
+  limit?: number;
+  search?: string;
+};
+
 export type AlertType = 'success' | 'info' | 'warning' | 'error' | undefined;
 
 export type SnackBarAlert = {

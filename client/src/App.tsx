@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Home from './pages/Home';
 import Demo from './pages/Demo';
+import Users from './pages/Users';
 import Navbar from './containers/Navbar';
 
 import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
@@ -42,6 +43,11 @@ function App() {
               isLoggedIn={!!currentUser}
               path="/demo"
               component={Demo}
+            />
+            <PrivateRoute
+              isLoggedIn={!!currentUser}
+              path="/users"
+              component={Users}
             />
             <Route>
               <Redirect to="/demo" />
