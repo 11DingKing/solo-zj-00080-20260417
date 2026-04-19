@@ -121,7 +121,7 @@ const Users: React.FC = () => {
     setPage(0);
   };
 
-  const handleChangePage = (_event: unknown, newPage: number) => {
+  const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
@@ -218,8 +218,8 @@ const Users: React.FC = () => {
                 count={usersList?.total || 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
               />
             </>
           )}
